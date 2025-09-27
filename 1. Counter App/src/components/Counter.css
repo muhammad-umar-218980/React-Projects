@@ -1,0 +1,196 @@
+.counter-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 20px;
+}
+
+.counter-card {
+	background: rgba(255, 255, 255, 0.95);
+	padding: 2.5rem;
+	border-radius: 25px;
+	box-shadow:
+		0 20px 40px rgba(0, 0, 0, 0.1),
+		0 0 0 1px rgba(255, 255, 255, 0.1);
+	text-align: center;
+	min-width: 350px;
+	backdrop-filter: blur(10px);
+	transition: transform 0.3s ease;
+}
+
+.counter-card:hover {
+	transform: translateY(-5px);
+}
+
+.counter-title {
+	color: #2d3748;
+	margin-bottom: 2rem;
+	font-size: 2.2rem;
+	font-weight: 300;
+	letter-spacing: 1px;
+}
+
+.counter-display {
+	margin: 2rem 0;
+	padding: 2rem;
+	border-radius: 20px;
+	box-shadow:
+		inset 0 0 20px rgba(0, 0, 0, 0.1),
+		0 10px 20px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
+
+.counter-value {
+	font-size: 5rem;
+	font-weight: 700;
+	color: white;
+	text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+	display: block;
+	transition: all 0.3s ease;
+}
+
+.counter-buttons {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	margin: 2rem 0;
+	flex-wrap: wrap;
+}
+
+.btn {
+	padding: 15px 30px;
+	border: none;
+	border-radius: 50px;
+	font-size: 1.3rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+	min-width: 100px;
+	position: relative;
+	overflow: hidden;
+}
+
+.btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+	transition: left 0.5s;
+}
+
+.btn:hover::before {
+	left: 100%;
+}
+
+.btn:hover {
+	transform: translateY(-3px) scale(1.05);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.btn:active {
+	transform: translateY(0) scale(1);
+}
+
+.btn-increment {
+	background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+	color: white;
+}
+
+.btn-decrement {
+	background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+	color: white;
+}
+
+.btn-reset {
+	background: linear-gradient(135deg, #a8a8a8 0%, #696969 100%);
+	color: white;
+}
+
+.counter-stats {
+	margin-top: 1.5rem;
+	padding: 1rem;
+	background: rgba(0, 0, 0, 0.05);
+	border-radius: 10px;
+}
+
+.counter-stats p {
+	color: #4a5568;
+	font-size: 1.1rem;
+	margin: 0;
+}
+
+.stat-value {
+	font-weight: 600;
+	margin-left: 0.5rem;
+	color: #2d3748;
+}
+
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.counter-value.changed {
+	animation: pulse 0.3s ease;
+}
+
+
+@media (max-width: 480px) {
+	.counter-card {
+		margin: 1rem;
+		padding: 2rem 1.5rem;
+		min-width: auto;
+		width: 100%;
+	}
+
+	.counter-buttons {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.btn {
+		width: 100%;
+		max-width: 200px;
+	}
+
+	.counter-value {
+		font-size: 4rem;
+	}
+}
+
+
+@media (prefers-color-scheme: dark) {
+	.counter-card {
+		background: rgba(45, 55, 72, 0.95);
+		color: white;
+	}
+
+	.counter-title {
+		color: white;
+	}
+
+	.counter-stats p {
+		color: #cbd5e0;
+	}
+
+	.stat-value {
+		color: white;
+	}
+}
