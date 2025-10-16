@@ -1,6 +1,7 @@
 import TodoNav from './components/TodoNav'
 import { useState } from 'react'
 import AddTodo from './components/AddTodo'
+import TodoItems from './components/TodoItems'
 import './App.css'
 
 
@@ -35,24 +36,7 @@ function App() {
 	return <>
 		<TodoNav></TodoNav>
 		<AddTodo onNewTodo={addNewTodo}></AddTodo>
-
-		<div className="container my-4">
-			{todos.length === 0 ? (
-				<p className="text-muted">No todos yet. Add one above.</p>
-			) : (
-				<ul className="list-group">
-					{todos.map((t, idx) => (
-						<li key={idx} className="list-group-item d-flex justify-content-between align-items-center">
-							<div>
-								<div>{t.itemName}</div>
-								<small className="text-muted">Due: {t.dueDate}</small>
-							</div>
-							<button className="btn btn-sm btn-danger" onClick={() => deleteTodo(t.itemName)}>Delete</button>
-						</li>
-					))}
-				</ul>
-			)}
-		</div>
+		<TodoItems todos={todos} onDeleteItem={deleteTodo}></TodoItems>
 	</>
 
 
