@@ -1,0 +1,381 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css');
+
+:root {
+	--blue-accent: #1e3a8a;
+	--purple-accent: #6d28d9;
+	--dark-bg: #0f0f1a;
+	--card-bg: rgba(30, 30, 46, 0.8);
+}
+
+body {
+	background: linear-gradient(-45deg, #0f0f1a, #1a1a2e, #16213e, #0f3460);
+	background-size: 400% 400%;
+	animation: gradientShift 15s ease infinite;
+	min-height: 100vh;
+	color: #fff;
+	position: relative;
+	overflow-x: hidden;
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background:
+		radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%),
+		radial-gradient(circle at 80% 20%, rgba(109, 40, 217, 0.1) 0%, transparent 50%);
+	pointer-events: none;
+	z-index: -1;
+}
+
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes float {
+
+	0%,
+	100% {
+		transform: translateY(0px) rotate(0deg);
+	}
+
+	50% {
+		transform: translateY(-20px) rotate(180deg);
+	}
+}
+
+.floating-particle {
+	position: fixed;
+	width: 4px;
+	height: 4px;
+	background: rgba(109, 40, 217, 0.4);
+	border-radius: 50%;
+	animation: float 6s ease-in-out infinite;
+	z-index: -1;
+}
+
+.glow-border {
+	position: relative;
+	background: var(--card-bg);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+}
+
+.glow-border::before {
+	content: '';
+	position: absolute;
+	inset: -2px;
+	background: linear-gradient(45deg, var(--blue-accent), var(--purple-accent));
+	border-radius: inherit;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+	opacity: 1;
+}
+
+.btn-glow {
+	background: linear-gradient(45deg, var(--blue-accent), var(--purple-accent));
+	border: none;
+	color: white;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-glow::after {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: rgba(255, 255, 255, 0.1);
+	transform: rotate(30deg);
+	transition: all 0.3s ease;
+}
+
+.btn-glow:hover::after {
+	transform: rotate(30deg) translate(10px, 10px);
+}
+
+.form-control-dark {
+	background: rgba(15, 15, 26, 0.6);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: white;
+	backdrop-filter: blur(10px);
+}
+
+.form-control-dark:focus {
+	background: rgba(15, 15, 26, 0.8);
+	border-color: var(--purple-accent);
+	box-shadow: 0 0 0 0.2rem rgba(109, 40, 217, 0.25);
+	color: white;
+}
+
+
+
+/* Navbar specific styles */
+.nav-glow-card {
+	background: rgba(30, 30, 46, 0.9);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	position: relative;
+	z-index: 1;
+	transition: all 0.3s ease;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.nav-hover-gradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(45deg, rgba(30, 58, 138, 0.1), rgba(109, 40, 217, 0.1));
+	border-radius: inherit;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	z-index: -1;
+}
+
+.nav-glow-card:hover .nav-hover-gradient {
+	opacity: 1;
+}
+
+.nav-glow-card:hover {
+	transform: translateY(-2px);
+	box-shadow:
+		0 12px 40px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(30, 58, 138, 0.3),
+		0 0 20px rgba(109, 40, 217, 0.2);
+}
+
+/* Alternative: If you prefer the gradient text but want it to stay visible */
+.nav-gradient-text {
+	background: linear-gradient(45deg, #1e3a8a, #6d28d9, #1e3a8a);
+	background-size: 200% 200%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: textShimmer 3s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+
+
+/* AddTodo specific styles */
+.add-todo-form {
+	background: rgba(30, 30, 46, 0.8);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	transition: all 0.3s ease;
+	position: relative;
+	z-index: 1;
+}
+
+.add-todo-form::before {
+	content: '';
+	position: absolute;
+	inset: -2px;
+	background: linear-gradient(45deg, rgba(30, 58, 138, 0.3), rgba(109, 40, 217, 0.3));
+	border-radius: inherit;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.add-todo-form:hover::before {
+	opacity: 0.3;
+	/* Very subtle gradient on hover */
+}
+
+.add-todo-form:hover {
+	background: rgba(40, 40, 56, 0.9);
+	/* Very light background change */
+	transform: translateY(-1px);
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.4),
+		0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Brighter placeholder text */
+.form-control-dark::placeholder {
+	color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.form-control-dark::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control-dark::-moz-placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control-dark:-ms-input-placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control-dark:-moz-placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+/* Enhanced date input styling */
+.form-control-dark[type="date"] {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control-dark[type="date"]::-webkit-calendar-picker-indicator {
+	filter: invert(0.8);
+	cursor: pointer;
+}
+
+/* Subtle focus effect */
+.add-todo-form:focus-within {
+	box-shadow:
+		0 8px 32px rgba(0, 0, 0, 0.5),
+		0 0 0 1px rgba(109, 40, 217, 0.3);
+}
+
+
+
+/* TodoItem specific styles */
+.todo-item-card {
+	background: rgba(30, 30, 46, 0.8);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	transition: all 0.3s ease;
+	position: relative;
+	z-index: 1;
+}
+
+.todo-item-card::before {
+	content: '';
+	position: absolute;
+	inset: -2px;
+	background: linear-gradient(45deg, rgba(30, 58, 138, 0.2), rgba(109, 40, 217, 0.2));
+	border-radius: inherit;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.todo-item-card:hover::before {
+	opacity: 0.3;
+	/* Very subtle gradient on hover */
+}
+
+.todo-item-card:hover {
+	background: rgba(40, 40, 56, 0.9);
+	/* Very light background change */
+	transform: translateY(-1px);
+	box-shadow:
+		0 8px 25px rgba(0, 0, 0, 0.3),
+		0 0 0 1px rgba(255, 255, 255, 0.05);
+	border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Enhanced button hover effect for todo items */
+.todo-item-card:hover .btn-glow {
+	transform: scale(1.02);
+	box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+}
+
+/* Smooth transition for all elements */
+.transition-all {
+	transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Alternative: Different subtle hover colors for visual variety */
+.todo-item-0:hover::before {
+	background: linear-gradient(45deg, rgba(30, 58, 138, 0.25), rgba(59, 130, 246, 0.25));
+}
+
+.todo-item-1:hover::before {
+	background: linear-gradient(45deg, rgba(109, 40, 217, 0.25), rgba(124, 58, 237, 0.25));
+}
+
+.todo-item-2:hover::before {
+	background: linear-gradient(45deg, rgba(30, 58, 138, 0.25), rgba(109, 40, 217, 0.25));
+}
