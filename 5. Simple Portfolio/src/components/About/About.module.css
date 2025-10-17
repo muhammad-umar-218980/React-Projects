@@ -1,0 +1,107 @@
+.aboutContainer {
+	background: var(--surface);
+	position: relative;
+}
+
+.avatarWrapper {
+	position: relative;
+	display: inline-block;
+}
+
+.avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #0b3b63 0%, #5b2eaa 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 3rem;
+	font-weight: 700;
+	color: white;
+	position: relative;
+	z-index: 2;
+	box-shadow: 0 0 18px rgba(91, 46, 170, 0.12);
+}
+
+.avatarGlow {
+	position: absolute;
+	top: -10px;
+	left: -10px;
+	right: -10px;
+	bottom: -10px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #0b3b63 0%, #5b2eaa 100%);
+	opacity: 0.3;
+	filter: blur(15px);
+	animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+	0%,
+	100% {
+		opacity: 0.3;
+		transform: scale(1);
+	}
+
+	50% {
+		opacity: 0.5;
+		transform: scale(1.05);
+	}
+}
+
+.bioContent {
+	padding-left: 2rem;
+}
+
+.bioText {
+	font-size: 1.1rem;
+	color: #9aa4b2;
+	line-height: 1.7;
+	margin-bottom: 2rem;
+}
+
+.bioList {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.bioItem {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+}
+
+.bioIcon {
+	font-size: 1.5rem;
+	flex-shrink: 0;
+}
+
+.bioItem strong {
+	color: #e6eef8;
+	font-weight: 600;
+}
+
+.muted {
+	color: #9aa4b2;
+	font-size: 0.95rem;
+}
+
+@media (max-width: 767.98px) {
+	.bioContent {
+		padding-left: 0;
+		text-align: center;
+	}
+
+	.bioItem {
+		justify-content: center;
+	}
+
+	.avatar {
+		width: 150px;
+		height: 150px;
+		font-size: 2rem;
+	}
+}
