@@ -1,0 +1,28 @@
+/* components/SkillBadge/SkillBadge.module.css */
+.skillBadge {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.03);
+	border-radius: 8px;
+	padding: 0.75rem 0.5rem;
+	text-align: center;
+	transition: all 0.26s cubic-bezier(0.2, 0.9, 0.2, 1);
+	cursor: default;
+}
+
+.skillBadge:hover {
+	transform: translateY(-2px);
+	background: rgba(91, 46, 170, 0.1);
+	border-color: rgba(91, 46, 170, 0.3);
+	box-shadow: 0 4px 12px rgba(91, 46, 170, 0.1);
+}
+
+.skillBadge.primary {
+	background: rgba(11, 59, 99, 0.15);
+	border-color: rgba(11, 59, 99, 0.3);
+}
+
+.skillText {
+	color: #e6eef8;
+	font-size: 0.875rem;
+	font-weight: 500;
+}
