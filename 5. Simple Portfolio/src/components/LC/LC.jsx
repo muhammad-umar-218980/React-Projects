@@ -1,6 +1,6 @@
-import styles from './LeetCodeSummary.module.css';
+import styles from './LC.module.css';
 
-function LeetCodeSummary() {
+function LC() {
 	return (
 		<div className={styles.leetcodeCard}>
 			<div className={styles.leetcodeIcon}>⚡</div>
@@ -16,4 +16,4 @@ function LeetCodeSummary() {
 	);
 }
 
-export default LeetCodeSummary
+export default LC;

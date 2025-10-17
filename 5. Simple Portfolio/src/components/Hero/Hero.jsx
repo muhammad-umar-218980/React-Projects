@@ -1,5 +1,5 @@
 import styles from './Hero.module.css';
-import LeetCodeSummary from '../LeetCodeSummary/LeetCodeSummary';
+import LC from '../LC/LC.jsx';
 
 function Hero() {
 	return (
@@ -27,7 +27,7 @@ function Hero() {
 						</div>
 
 						<div className="mt-4">
-							<LeetCodeSummary />
+							<LC />
 						</div>
 					</div>
 
