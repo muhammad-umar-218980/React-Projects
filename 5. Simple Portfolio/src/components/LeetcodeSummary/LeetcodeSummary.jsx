@@ -16,4 +16,4 @@ function LeetCodeSummary() {
 	);
 }
 
-export default LeetCodeSummary;
+export default LeetCodeSummary
