@@ -1,10 +1,11 @@
 import './App.css'
 
+
 function App() {
 
   return (
     <>
-    Hello World
+    <h1 className='bg-amber-400'>Hello Tailwind Css</h1>
     </>
   )
 }
