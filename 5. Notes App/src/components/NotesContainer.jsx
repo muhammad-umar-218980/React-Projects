@@ -3,7 +3,7 @@ import SampleNotes from '../Sample Notes/SampleNotes.js'
 
 const NotesContainer = () => {
   return (
-    <div className = 'mt-29'>
+    <div>
       {SampleNotes.map((note) => (
         <Note key={note.key} task={note.task} Details={note.Details} />
       ))}
