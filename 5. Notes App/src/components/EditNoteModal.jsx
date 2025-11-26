@@ -1,43 +1,47 @@
 import { useState, useEffect } from 'react';
 import { X, Palette } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
-const colors = [
-    { name: 'Default', value: 'bg-white' },
-    { name: 'Red', value: 'bg-red-100' },
-    { name: 'Orange', value: 'bg-orange-100' },
-    { name: 'Yellow', value: 'bg-yellow-100' },
-    { name: 'Green', value: 'bg-green-100' },
-    { name: 'Teal', value: 'bg-teal-100' },
-    { name: 'Blue', value: 'bg-blue-100' },
-    { name: 'Indigo', value: 'bg-indigo-100' },
-    { name: 'Purple', value: 'bg-purple-100' },
-    { name: 'Pink', value: 'bg-pink-100' },
+const colorOptions = [
+    { name: 'Default', key: 'default' },
+    { name: 'Red', key: 'red' },
+    { name: 'Orange', key: 'orange' },
+    { name: 'Yellow', key: 'yellow' },
+    { name: 'Green', key: 'green' },
+    { name: 'Teal', key: 'teal' },
+    { name: 'Blue', key: 'blue' },
+    { name: 'Indigo', key: 'indigo' },
+    { name: 'Purple', key: 'purple' },
+    { name: 'Pink', key: 'pink' },
 ];
 
 const EditNoteModal = ({ note, onClose, onUpdate }) => {
+    const { theme } = useTheme();
     const [title, setTitle] = useState(note.title);
     const [content, setContent] = useState(note.content);
-    const [selectedColor, setSelectedColor] = useState(note.color || 'bg-white');
+    const [selectedColorKey, setSelectedColorKey] = useState(note.colorKey || 'default');
     const [showColorPicker, setShowColorPicker] = useState(false);
 
     useEffect(() => {
         setTitle(note.title);
         setContent(note.content);
-        setSelectedColor(note.color || 'bg-white');
+        setSelectedColorKey(note.colorKey || 'default');
     }, [note]);
 
     const handleSave = () => {
-        onUpdate({ ...note, title, content, color: selectedColor });
+        onUpdate({ ...note, title, content, colorKey: selectedColorKey });
         onClose();
     };
 
+    const activeColorClass = theme.colors[selectedColorKey];
+
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-            <div className={`w-full max-w-2xl rounded-lg shadow-2xl ${selectedColor} relative flex flex-col max-h-[90vh]`}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+            <div className={`w-full max-w-2xl rounded-lg shadow-2xl relative flex flex-col max-h-[90vh] ${activeColorClass} ${theme.cardBase}`}>
 
                 {/* Header */}
                 <div className="flex justify-end p-2">
-                    <button onClick={onClose} className="p-2 hover:bg-black/5 rounded-full transition-colors text-gray-600">
+                    <button onClick={onClose} className={`p-2 rounded-full transition-colors ${theme.actionHover} ${theme.mutedText}`}>
                         <X size={20} />
                     </button>
                 </div>
@@ -47,23 +51,23 @@ const EditNoteModal = ({ note, onClose, onUpdate }) => {
                     <input
                         type="text"
                         placeholder="Title"
-                        className="w-full text-xl font-bold bg-transparent outline-none placeholder-gray-500 mb-4"
+                        className={`w-full text-xl font-bold bg-transparent outline-none placeholder-gray-500/50 mb-4`}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
                     <textarea
                         placeholder="Note"
-                        className="w-full resize-none bg-transparent outline-none placeholder-gray-500 min-h-[200px] text-base"
+                        className={`w-full resize-none bg-transparent outline-none placeholder-gray-500/50 min-h-[200px] text-base`}
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 flex items-center justify-between mt-auto border-t border-black/5">
+                <div className={`p-4 flex items-center justify-between mt-auto border-t ${theme.navbarBg.includes('border') ? 'border-transparent' : 'border-black/5'}`}>
                     <div className="relative">
                         <button
-                            className="p-2 hover:bg-black/5 rounded-full transition-colors text-gray-600"
+                            className={`p-2 rounded-full transition-colors ${theme.actionHover} ${theme.mutedText}`}
                             onClick={() => setShowColorPicker(!showColorPicker)}
                             title="Change color"
                         >
@@ -71,13 +75,13 @@ const EditNoteModal = ({ note, onClose, onUpdate }) => {
                         </button>
 
                         {showColorPicker && (
-                            <div className="absolute bottom-full left-0 mb-2 p-2 bg-white shadow-xl rounded-lg border border-gray-200 flex gap-1 z-20 w-max">
-                                {colors.map((c) => (
+                            <div className={`absolute bottom-full left-0 mb-2 p-2 shadow-xl rounded-lg border flex gap-1 z-20 w-max overflow-x-auto max-w-[80vw] ${theme.navbarBg} ${theme.cardBase}`}>
+                                {colorOptions.map((c) => (
                                     <button
-                                        key={c.name}
-                                        className={`w-6 h-6 rounded-full border border-gray-300 ${c.value} hover:scale-110 transition-transform`}
+                                        key={c.key}
+                                        className={`w-6 h-6 rounded-full transition-transform hover:scale-110 ${theme.colors[c.key]} ${selectedColorKey === c.key ? 'ring-2 ring-offset-1 ring-gray-400' : ''}`}
                                         onClick={() => {
-                                            setSelectedColor(c.value);
+                                            setSelectedColorKey(c.key);
                                             setShowColorPicker(false);
                                         }}
                                         title={c.name}
@@ -89,7 +93,7 @@ const EditNoteModal = ({ note, onClose, onUpdate }) => {
 
                     <button
                         onClick={handleSave}
-                        className="px-6 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-gray-800 transition-colors shadow-sm"
+                        className={`px-6 py-2 text-sm font-medium rounded-md transition-colors shadow-sm ${theme.textColor === 'text-white' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
                     >
                         Save
                     </button>

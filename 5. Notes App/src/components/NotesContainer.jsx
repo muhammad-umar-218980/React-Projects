@@ -3,26 +3,46 @@ import { v4 as uuidv4 } from 'uuid';
 import Note from './Note';
 import AddNote from './AddNote';
 import EditNoteModal from './EditNoteModal';
+import { useTheme } from '../context/ThemeContext';
 
 const NotesContainer = () => {
+  const { theme } = useTheme();
   const [notes, setNotes] = useState(() => {
     const savedNotes = localStorage.getItem('notes');
     if (savedNotes) {
-      return JSON.parse(savedNotes);
+      const parsed = JSON.parse(savedNotes);
+      // Migration: If notes have 'color' (old class) but not 'colorKey', map them
+      return parsed.map(n => {
+        if (n.colorKey) return n;
+
+        // Simple mapping from old classes to new keys
+        let key = 'default';
+        if (n.color && n.color.includes('red')) key = 'red';
+        else if (n.color && n.color.includes('orange')) key = 'orange';
+        else if (n.color && n.color.includes('yellow')) key = 'yellow';
+        else if (n.color && n.color.includes('green')) key = 'green';
+        else if (n.color && n.color.includes('teal')) key = 'teal';
+        else if (n.color && n.color.includes('blue')) key = 'blue';
+        else if (n.color && n.color.includes('indigo')) key = 'indigo';
+        else if (n.color && n.color.includes('purple')) key = 'purple';
+        else if (n.color && n.color.includes('pink')) key = 'pink';
+
+        return { ...n, colorKey: key };
+      });
     }
     return [
       {
         id: uuidv4(),
         title: 'Welcome to Notes!',
         content: 'This is a simple notes app. You can add, edit, and delete notes.',
-        color: 'bg-yellow-100',
+        colorKey: 'yellow',
         date: new Date().toLocaleDateString(),
       },
       {
         id: uuidv4(),
         title: 'Try changing colors',
         content: 'Click the palette icon to change the note color.',
-        color: 'bg-blue-100',
+        colorKey: 'blue',
         date: new Date().toLocaleDateString(),
       }
     ];
@@ -34,12 +54,12 @@ const NotesContainer = () => {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
 
-  const addNote = ({ title, content, color }) => {
+  const addNote = ({ title, content, colorKey }) => {
     const newNote = {
       id: uuidv4(),
       title,
       content,
-      color,
+      colorKey,
       date: new Date().toLocaleDateString(),
     };
     setNotes([newNote, ...notes]);
@@ -58,7 +78,7 @@ const NotesContainer = () => {
       <AddNote onAdd={addNote} />
 
       {notes.length === 0 ? (
-        <div className="text-center text-gray-500 mt-20">
+        <div className={`text-center mt-20 ${theme.mutedText}`}>
           <p className="text-xl">No notes yet</p>
           <p className="text-sm">Add a note to get started</p>
         </div>
