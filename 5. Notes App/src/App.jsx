@@ -4,15 +4,12 @@ import './App.css'
 
 
 let App = function () {
-
-  
-
-  return (<>
-    <Navbar />
-    <NotesContainer />
-  </>)
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
+      <Navbar />
+      <NotesContainer />
+    </div>
+  )
 }
-
-
 
 export default App;
